@@ -41,6 +41,7 @@ public class UserServiceImplTest {
 
   @Test
   public void testExistsWithInvalidUserId() {
+    when(userRepository.existsById(any())).thenReturn(false);
     assertFalse(userService.exists(null));
     assertFalse(userService.exists(""));
     verify(userRepository, never()).existsById(any());
@@ -66,6 +67,7 @@ public class UserServiceImplTest {
     assertEquals(expectedUsers, actualUsers);
     verify(userRepository).findAll();
   }
+
 
   // TODO: add more tests
 }

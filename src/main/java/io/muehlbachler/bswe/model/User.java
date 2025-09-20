@@ -30,7 +30,8 @@ public class User {
 
   public static User withId(final String id) {
     final User user = new User();
-    user.setId(null);
+    user.setId(id);
+    user.setUsername(id);
     return user;
   }
 }

@@ -55,6 +55,17 @@ public class GeocodingServiceImpl implements GeocodingService {
     }
   }
 
+  /**
+   * Fallback method for coordinate lookups when the primary call fails.
+   * <p>
+   * Intended to be used by resilience mechanisms (e.g., circuit breakers, retries) to provide a
+   * deterministic failure path. Currently logs the exception and returns {@code null}.
+   * </p>
+   *
+   * @param ex the exception that triggered the fallback (logged at ERROR)
+   * @return always {@code null}; callers should handle absence of coordinates
+   */
+
   protected Coordinates fetchCoordinatesFallback(final Exception ex) {
     LOG.error("failed to fetch coordinates", ex);
     return null;
